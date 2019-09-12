@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Crud.Models.marcas>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>index</h2>
+
+<p>
+    @Html.ActionLink("Nueva Marca", "create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.marcaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foto)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.marcaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.foto)
+
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "edit", new { id = item.marcaId }) |
+                @Html.ActionLink("Detalles", "details", new { id = item.marcaId }) |
+                @Html.ActionLink("Eliminar", "delete", new { id = item.marcaId }, new { @class = "aElimina"})
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(".aElimina").click(function (event) {
+            if (!confirm('¿Estás seguro de eliminar?')) {
+                event.preventDefault();
+            }
+        });
+
+    </script>
+}

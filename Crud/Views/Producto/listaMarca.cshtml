@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Crud.Models.marcas>
+
+
+    <select class="form-control" id="marcaId" name="marcaId">
+
+        @foreach (var item in Model)
+        {
+            <option value="@item.marcaId">@item.nombre</option>
+        }
+         
+    </select>
+

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_lafinaModelStoreContainer" CdmEntityContainer="db_lafinaEntities">
+    <EntitySetMapping Name="categorias">
+      <EntityTypeMapping TypeName="db_lafinaModel.categorias">
+        <MappingFragment StoreEntitySet="categorias">
+          <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marcas">
+      <EntityTypeMapping TypeName="db_lafinaModel.marcas">
+        <MappingFragment StoreEntitySet="marcas">
+          <ScalarProperty Name="marcaId" ColumnName="marcaId" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productos">
+      <EntityTypeMapping TypeName="db_lafinaModel.productos">
+        <MappingFragment StoreEntitySet="productos">
+          <ScalarProperty Name="productoId" ColumnName="productoId" />
+          <ScalarProperty Name="marcaId" ColumnName="marcaId" />
+          <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+          <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="volumen" ColumnName="volumen" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

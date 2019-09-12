@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_lafinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categorias">
+    <Key>
+      <PropertyRef Name="categoriaId" />
+    </Key>
+    <Property Name="categoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codigo" Type="varchar" MaxLength="14" StoreGeneratedPattern="Computed" />
+    <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="foto" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="marcaId" />
+    </Key>
+    <Property Name="marcaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="45" />
+    <Property Name="foto" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="productos">
+    <Key>
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="productoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="marcaId" Type="int" />
+    <Property Name="categoriaId" Type="int" />
+    <Property Name="proveedorId" Type="int" />
+    <Property Name="codigo" Type="varchar" MaxLength="20" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="descripcion" Type="varchar" MaxLength="80" />
+    <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="stock" Type="int" />
+    <Property Name="fechaCreacion" Type="datetime" />
+    <Property Name="volumen" Type="varchar" MaxLength="20" />
+    <Property Name="tipo" Type="varchar" MaxLength="20" />
+    <Property Name="estado" Type="bit" />
+    <Property Name="foto" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="R_42">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="marcaId" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="marcaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_50">
+    <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categorias">
+        <PropertyRef Name="categoriaId" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="categoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_lafinaModelStoreContainer">
+    <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="marcas" EntityType="Self.marcas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="R_42" Association="Self.R_42">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="R_50" Association="Self.R_50">
+      <End Role="categorias" EntitySet="categorias" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_lafinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="marcaId" />
+    </Key>
+    <Property Name="marcaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="MarcaContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="marcas" EntityType="Self.marcas" />
+  </EntityContainer>
+</Schema>

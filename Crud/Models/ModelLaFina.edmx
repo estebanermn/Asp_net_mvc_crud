@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_lafinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="categoriaId" />
+          </Key>
+          <Property Name="categoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="14" StoreGeneratedPattern="Computed" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="foto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="marcaId" />
+          </Key>
+          <Property Name="marcaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="foto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marcaId" Type="int" />
+          <Property Name="categoriaId" Type="int" />
+          <Property Name="proveedorId" Type="int" />
+          <Property Name="codigo" Type="varchar" MaxLength="20" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="80" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="stock" Type="int" />
+          <Property Name="fechaCreacion" Type="datetime" />
+          <Property Name="volumen" Type="varchar" MaxLength="20" />
+          <Property Name="tipo" Type="varchar" MaxLength="20" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="foto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="R_42">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="marcaId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="marcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_50">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="categoriaId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_lafinaModelStoreContainer">
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="R_42" Association="Self.R_42">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="R_50" Association="Self.R_50">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_lafinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="categoriaId" />
+          </Key>
+          <Property Name="categoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productos" Relationship="Self.R_50" FromRole="categorias" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="marcaId" />
+          </Key>
+          <Property Name="marcaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productos" Relationship="Self.R_42" FromRole="marcas" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marcaId" Type="Int32" />
+          <Property Name="categoriaId" Type="Int32" />
+          <Property Name="proveedorId" Type="Int32" />
+          <Property Name="codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="stock" Type="Int32" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="volumen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categorias" Relationship="Self.R_50" FromRole="productos" ToRole="categorias" />
+          <NavigationProperty Name="marcas" Relationship="Self.R_42" FromRole="productos" ToRole="marcas" />
+        </EntityType>
+        <Association Name="R_50">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="categoriaId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_42">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="marcaId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="marcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_lafinaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorias" EntityType="Self.categorias" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" />
+          <EntitySet Name="productos" EntityType="Self.productos" />
+          <AssociationSet Name="R_50" Association="Self.R_50">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="R_42" Association="Self.R_42">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_lafinaModelStoreContainer" CdmEntityContainer="db_lafinaEntities">
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="db_lafinaModel.categorias">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marcas">
+            <EntityTypeMapping TypeName="db_lafinaModel.marcas">
+              <MappingFragment StoreEntitySet="marcas">
+                <ScalarProperty Name="marcaId" ColumnName="marcaId" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="db_lafinaModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="productoId" ColumnName="productoId" />
+                <ScalarProperty Name="marcaId" ColumnName="marcaId" />
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+                <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="volumen" ColumnName="volumen" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

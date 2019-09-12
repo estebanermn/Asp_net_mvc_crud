@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Crud.Models.productos>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>index</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Producto", "create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marcaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoriaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proveedorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.volumen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.foto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marcas.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categorias.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proveedorId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.volumen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.foto)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "edit", new {  id=item.productoId }) |
+            @Html.ActionLink("Detalle", "details", new { id=item.productoId}) |
+            
+        </td>
+    </tr>
+}
+
+</table>

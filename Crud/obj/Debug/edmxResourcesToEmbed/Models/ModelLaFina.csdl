@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_lafinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categorias">
+    <Key>
+      <PropertyRef Name="categoriaId" />
+    </Key>
+    <Property Name="categoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="productos" Relationship="Self.R_50" FromRole="categorias" ToRole="productos" />
+  </EntityType>
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="marcaId" />
+    </Key>
+    <Property Name="marcaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="productos" Relationship="Self.R_42" FromRole="marcas" ToRole="productos" />
+  </EntityType>
+  <EntityType Name="productos">
+    <Key>
+      <PropertyRef Name="productoId" />
+    </Key>
+    <Property Name="productoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="marcaId" Type="Int32" />
+    <Property Name="categoriaId" Type="Int32" />
+    <Property Name="proveedorId" Type="Int32" />
+    <Property Name="codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="stock" Type="Int32" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="volumen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="categorias" Relationship="Self.R_50" FromRole="productos" ToRole="categorias" />
+    <NavigationProperty Name="marcas" Relationship="Self.R_42" FromRole="productos" ToRole="marcas" />
+  </EntityType>
+  <Association Name="R_50">
+    <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categorias">
+        <PropertyRef Name="categoriaId" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="categoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_42">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="marcaId" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="marcaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_lafinaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categorias" EntityType="Self.categorias" />
+    <EntitySet Name="marcas" EntityType="Self.marcas" />
+    <EntitySet Name="productos" EntityType="Self.productos" />
+    <AssociationSet Name="R_50" Association="Self.R_50">
+      <End Role="categorias" EntitySet="categorias" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="R_42" Association="Self.R_42">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

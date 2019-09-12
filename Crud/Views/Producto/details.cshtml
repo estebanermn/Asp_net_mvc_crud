@@ -1,0 +1,125 @@
+﻿@model Crud.Models.productos
+
+@{
+    ViewBag.Title = "details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>details</h2>
+
+<div>
+    <h4>productos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marcaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marcas.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoriaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categorias.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proveedorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.volumen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.volumen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.foto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.foto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "edit", new {  id = Model.productoId }) |
+    @Html.ActionLink("Regrear", "index")
+</p>
